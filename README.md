@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/frosas/potpourri.svg)](https://travis-ci.org/frosas/potpourri)
 
-_pot•pour•ri  (pō′pŏŏ rē′), n._
+_(pō′pŏŏ rē′), n._
 
 1. _A mixture of dried petals of roses or other flowers with spices, kept in a jar for their fragrance._
 2. _A musical medley._
