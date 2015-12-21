@@ -29,6 +29,11 @@ var potpourri = require('potpourri/dist/es5');
 potpourri.promisify(fs, 'readFile')('/etc/passwd').then(passwd => console.log(String(passwd)));
 ```
 
+### API reference
+
+- [`promisify()`](src/index.js)
+- [`toFunction()`](src/index.js)
+
 ### Development
 
 ```bash
