@@ -1,17 +1,19 @@
 /**
  * Converts a node-style function to a promise-style one
  *
- * const salute = (name, callback) => callback(null, `Hi ${name}`);
- * promisify(salute)('John').then(salutation => …)); → "Hi John"
- * 
+ * Example:
+ *   const salute = (name, callback) => callback(null, `Hi ${name}`);
+ *   promisify(salute)('John').then(salutation => …)); → "Hi John"
+ *
  * @param {objectOrFunction} objectOrFunction See `toFunction()`
  * @param {Function} [func] See `toFunction()`
- * @return {Function.<Promise>}
+ * @return {Function.<Promise>} In case the node function callback passes multiple
+ *   values, the fulfilled promise will pass an array with those values.
  */
 export function promisify(objectOrFunction, func) {
   return (...args) => new Promise((resolve, reject) => {
-    toFunction(objectOrFunction, func)(...args, (error, value) => {
-      error ? reject(error) : resolve(value);
+    toFunction(objectOrFunction, func)(...args, (error, ...values) => {
+      error ? reject(error) : resolve(values.length > 1 ? values : values[0]);
     });
   });
 }

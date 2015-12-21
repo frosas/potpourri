@@ -8,12 +8,14 @@ exports.toFunction = toFunction;
 /**
  * Converts a node-style function to a promise-style one
  *
- * const salute = (name, callback) => callback(null, `Hi ${name}`);
- * promisify(salute)('John').then(salutation => …)); → "Hi John"
- * 
+ * Example:
+ *   const salute = (name, callback) => callback(null, `Hi ${name}`);
+ *   promisify(salute)('John').then(salutation => …)); → "Hi John"
+ *
  * @param {objectOrFunction} objectOrFunction See `toFunction()`
  * @param {Function} [func] See `toFunction()`
- * @return {Function.<Promise>}
+ * @return {Function.<Promise>} In case the node function callback passes multiple
+ *   values, the fulfilled promise will pass an array with those values.
  */
 function promisify(objectOrFunction, func) {
   return function () {
@@ -22,8 +24,12 @@ function promisify(objectOrFunction, func) {
     }
 
     return new Promise(function (resolve, reject) {
-      toFunction(objectOrFunction, func).apply(undefined, args.concat([function (error, value) {
-        error ? reject(error) : resolve(value);
+      toFunction(objectOrFunction, func).apply(undefined, args.concat([function (error) {
+        for (var _len2 = arguments.length, values = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+          values[_key2 - 1] = arguments[_key2];
+        }
+
+        error ? reject(error) : resolve(values.length > 1 ? values : values[0]);
       }]));
     });
   };

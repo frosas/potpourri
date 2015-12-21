@@ -12,7 +12,7 @@ describe("promisify()", () => {
     promisify(func)('a');
   });
   
-  it("returns a fullfilled promise out of a succeeding node function", () => {
+  it("returns a fulfilled promise out of a succeeding node function", () => {
     const func = callback => callback(null, 'a');
     return promisify(func)().then(value => assert.equal(value, 'a'));
   });
@@ -21,6 +21,13 @@ describe("promisify()", () => {
     const error = new Error;
     const func = callback => callback(error);
     return promisify(func)().catch(_error => assert.equal(_error, error));
+  });
+  
+  it("returns all callback values as an array if more than one", done => {
+    promisify(callback => callback(null, 'a', 'b'))().then(values => {
+      assert.deepEqual(values, ['a', 'b']);
+      done();
+    });
   });
 });
 
