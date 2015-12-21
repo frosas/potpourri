@@ -19,16 +19,19 @@ With ES6:
 
 ```js
 import {promisify} from 'potpourri';
+import * as fs from 'fs';
 
-promisify(fs, 'readFile')('/etc/passwd').then(passwd => console.log(String(passwd)));
+process.on('unhandledRejection', console.log);
+
+promisify(fs, 'readFile')('/etc/hosts', 'utf8').then(console.log);
 ```
 
 With ES5:
 
 ```js
-var potpourri = require('potpourri/dist/es5');
+var promisify = require('potpourri/dist/es5').promisify;
 
-potpourri.promisify(fs, 'readFile')('/etc/passwd').then(passwd => console.log(String(passwd)));
+...
 ```
 
 ### API reference
