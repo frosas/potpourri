@@ -12,12 +12,12 @@ describe("promisify()", () => {
     promisify(func)('a');
   });
   
-  it("promisifies a succeeding node function", () => {
+  it("returns a fullfilled promise out of a succeeding node function", () => {
     const func = callback => callback(null, 'a');
     return promisify(func)().then(value => assert.equal(value, 'a'));
   });
     
-  it("promisifies a failing node function", () => {
+  it("returns a rejected promise out of a failing node function", () => {
     const error = new Error;
     const func = callback => callback(error);
     return promisify(func)().catch(_error => assert.equal(_error, error));
