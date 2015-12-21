@@ -15,7 +15,7 @@ _pot•pour•ri  (pō′pŏŏ rē′), n._
 $ npm i potpourri [--save|--save-dev]
 ```
 
-With ES2015:
+With ES6:
 
 ```js
 import {promisify} from 'potpourri';
