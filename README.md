@@ -1,5 +1,7 @@
 ## Potpourri
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/frosas/potpourri.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/frosas/potpourri.svg)](https://travis-ci.org/frosas/potpourri)
 
 _(pō′pŏŏ rē′), n._
