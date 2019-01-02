@@ -5,8 +5,8 @@
   "license": "ISC",
   "main": "src/index.js",
   "scripts": {
-    "build": "babel src -d dist/es5 && babel tests -d dist/tests",
-    "test": "npm run build && mocha dist/tests",
+    "build": "babel src -d dist/es5",
+    "test": "mocha tests",
     "watch": "nodemon -w src -w tests -x 'npm test'"
   },
   "devDependencies": {

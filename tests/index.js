@@ -1,6 +1,6 @@
-import {promisify, toFunction} from '../es5';
-import mocha from 'mocha';
-import assert from 'assert';
+const {promisify, toFunction} = require('../src/index');
+const mocha = require('mocha');
+const assert = require('assert');
 
 describe("promisify()", () => {
   it("passes arguments and callback", done => {

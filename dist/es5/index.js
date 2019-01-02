@@ -1,10 +1,5 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.promisify = promisify;
-exports.toFunction = toFunction;
 /**
  * Converts a node-style function to a promise-style one
  *
@@ -17,7 +12,7 @@ exports.toFunction = toFunction;
  * @return {Function.<Promise>} In case the node function callback passes multiple
  *   values, the fulfilled promise will pass an array with those values.
  */
-function promisify(objectOrFunction, func) {
+exports.promisify = function (objectOrFunction, func) {
   return function () {
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -33,7 +28,7 @@ function promisify(objectOrFunction, func) {
       }]));
     });
   };
-}
+};
 
 /**
  * @param {Object|Function} objectOrFunction
@@ -43,8 +38,8 @@ function promisify(objectOrFunction, func) {
  *   toFunction(object, functionName) → object[functionName].bind(object)
  *   toFunction(function) → function
  */
-function toFunction(objectOrFunction, func) {
+exports.toFunction = function (objectOrFunction, func) {
   if (!func) return objectOrFunction;
   if (typeof func == 'string') return toFunction(objectOrFunction, objectOrFunction[func]);
   return func.bind(objectOrFunction);
-}
+};
